@@ -3,22 +3,13 @@ package com.retheviper.springwebfluxsample.application.domain.entity
 import javax.persistence.*
 
 @Entity
-class Member {
+data class Member(
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long?,
+    @Column(nullable = false, unique = true, length = 16) var uid: String,
+    @Column(nullable = false, length = 16) var name: String,
+    @Column(nullable = false) var password: String
+)
 
-    /** Primary Key  */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0
+data class MemberDto(var uid: String, var name: String)
 
-    /** Member's id  */
-    @Column(nullable = false, unique = true, length = 16)
-    var uid: String? = null
-
-    /** Member's name  */
-    @Column(nullable = false, length = 16)
-    var name: String? = null
-
-    /** Member's password  */
-    @Column(nullable = false)
-    var password: String? = null
-}
+data class MemberForm(var uid: String, var name: String, var password: String)

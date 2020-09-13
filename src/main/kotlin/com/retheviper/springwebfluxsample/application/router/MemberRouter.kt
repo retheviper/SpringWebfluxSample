@@ -3,12 +3,9 @@ package com.retheviper.springwebfluxsample.application.router
 import com.retheviper.springwebfluxsample.application.handler.MemberHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.config.EnableWebFlux
-import org.springframework.web.reactive.function.server.*
-import org.springframework.web.reactive.function.server.RequestPredicates.GET
 import org.springframework.web.reactive.function.server.RequestPredicates.path
 import org.springframework.web.reactive.function.server.RouterFunctions.nest
-import org.springframework.web.reactive.function.server.RouterFunctions.route
+import org.springframework.web.reactive.function.server.router
 
 @Configuration
 class MemberRouter(private val handler: MemberHandler) {
