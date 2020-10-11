@@ -15,10 +15,10 @@ class MemberRouter(private val handler: MemberHandler) {
         router {
             listOf(
                 GET("/", handler::listMember),
-                GET("/{uid}", handler::getMember),
+                GET("/{id}", handler::getMember),
                 POST("/", handler::createMember),
-                PUT("/{uid}", handler::updateMember),
-                DELETE("/{uid}", handler::deleteMember)
+                PUT("/{id}", handler::updateMember),
+                DELETE("/{id}", handler::deleteMember)
             )
         }
     )
