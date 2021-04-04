@@ -87,5 +87,6 @@ class MemberHandler(private val repository: MemberRepository, private val passwo
             .contentType(MediaType.APPLICATION_JSON)
             .body(Mono.justOrEmpty(repository.findByUid(request.pathVariable(id)))
                 .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
-                .map { member -> repository.delete(member) })
+                .map { repository.delete(it!!) }
+            )
 }

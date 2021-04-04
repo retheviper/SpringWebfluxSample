@@ -14,9 +14,9 @@ class MemberRouter(private val handler: MemberHandler) {
     fun routeMember() = nest(path("/api/v1/web/members"),
         router {
             listOf(
-                GET("/", handler::listMember),
+                GET("", handler::listMember),
                 GET("/{id}", handler::getMember),
-                POST("/", handler::createMember),
+                POST("", handler::createMember),
                 PUT("/{id}", handler::updateMember),
                 DELETE("/{id}", handler::deleteMember)
             )
