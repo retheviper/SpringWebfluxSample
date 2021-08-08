@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.server.RequestPredicates.path
 import org.springframework.web.reactive.function.server.RouterFunction
 import org.springframework.web.reactive.function.server.RouterFunctions.nest
 import org.springframework.web.reactive.function.server.ServerResponse
-import org.springframework.web.reactive.function.server.router
+import org.springframework.web.reactive.function.server.coRouter
 
 @Configuration
 class MemberRouter(private val handler: MemberHandler) {
@@ -15,9 +15,9 @@ class MemberRouter(private val handler: MemberHandler) {
     @Bean
     fun routeMember(): RouterFunction<ServerResponse> =
         nest(path("/api/v1/web/members"),
-            router {
+            coRouter {
                 listOf(
-                    GET("", handler::listMember),
+                    GET("") { handler.listMember() },
                     GET("/{id}", handler::getMember),
                     POST("", handler::createMember),
                     PUT("/{id}", handler::updateMember),
