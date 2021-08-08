@@ -8,15 +8,15 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.server.SecurityWebFilterChain
 
 @Configuration
-open class SecurityConfig {
+class SecurityConfig {
 
     @Bean
-    open fun passwordEncoder(): PasswordEncoder {
+    fun passwordEncoder(): PasswordEncoder {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder()
     }
 
     @Bean
-    open fun securityWebFilterChain(
+    fun securityWebFilterChain(
         http: ServerHttpSecurity
     ): SecurityWebFilterChain {
 
