@@ -3,7 +3,7 @@ package com.retheviper.springwebfluxsample.springwebfluxsample.application.route
 import com.retheviper.springwebfluxsample.application.domain.model.dto.MemberDto
 import com.retheviper.springwebfluxsample.application.handler.MemberHandler
 import com.retheviper.springwebfluxsample.application.router.MemberRouter
-import com.retheviper.springwebfluxsample.springwebfluxsample.testbase.TestBase
+import com.retheviper.springwebfluxsample.springwebfluxsample.testbase.data.TestDataCreator
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -39,12 +39,12 @@ class MemberRouterTest {
 
     @Test
     fun listMember_OK() {
-        val expected = TestBase.createMemberDtoList()
+        val expected = TestDataCreator.createMemberDtoList()
 
         coEvery {
             handler.listMember()
         } coAnswers {
-            ServerResponse.ok().body(Flux.fromIterable(TestBase.createMemberDtoList())).awaitSingle()
+            ServerResponse.ok().body(Flux.fromIterable(TestDataCreator.createMemberDtoList())).awaitSingle()
         }
 
         webClient.get()
