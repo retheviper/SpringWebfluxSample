@@ -10,4 +10,7 @@ In Construction!
 
 ## Includes
 
-- Gradle (With Kotlin)
+- [Gradle](https://gradle.org) (Kotlin DSL)
+- [Kotest](https://github.com/kotest/kotest)
+- [Spring Security](https://spring.io/projects/spring-security) with [JWT](https://jwt.io)
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) with [H2](https://github.com/r2dbc/r2dbc-h2) (Memory Mode)
