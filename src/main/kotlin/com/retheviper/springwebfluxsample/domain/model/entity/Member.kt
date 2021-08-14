@@ -1,12 +1,15 @@
-package com.retheviper.springwebfluxsample.application.domain.model.entity
+package com.retheviper.springwebfluxsample.domain.model.entity
 
 import org.springframework.data.annotation.*
+import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDateTime
 
 data class Member(
-    @Id var id: Long?,
 
-    val uid: String,
+    @Id
+    var id: Long?,
+
+    val userId: String,
 
     val name: String,
 
@@ -34,5 +37,3 @@ data class Member(
 
     val memberInformationId: Long?
 )
-
-data class MemberForm(var uid: String, var name: String, var password: String)

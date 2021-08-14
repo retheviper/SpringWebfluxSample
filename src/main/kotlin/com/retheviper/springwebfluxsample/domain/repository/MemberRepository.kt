@@ -1,6 +1,6 @@
-package com.retheviper.springwebfluxsample.application.domain.repository
+package com.retheviper.springwebfluxsample.domain.repository
 
-import com.retheviper.springwebfluxsample.application.domain.model.entity.Member
+import com.retheviper.springwebfluxsample.domain.model.entity.Member
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.r2dbc.repository.R2dbcRepository
 import reactor.core.publisher.Mono

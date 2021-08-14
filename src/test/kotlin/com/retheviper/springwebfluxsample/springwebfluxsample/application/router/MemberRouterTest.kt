@@ -1,6 +1,6 @@
 package com.retheviper.springwebfluxsample.springwebfluxsample.application.router
 
-import com.retheviper.springwebfluxsample.application.domain.model.dto.MemberDto
+import com.retheviper.springwebfluxsample.domain.model.dto.MemberDto
 import com.retheviper.springwebfluxsample.application.handler.MemberHandler
 import com.retheviper.springwebfluxsample.application.router.MemberRouter
 import com.retheviper.springwebfluxsample.springwebfluxsample.testbase.data.TestDataCreator
