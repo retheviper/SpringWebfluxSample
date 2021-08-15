@@ -39,7 +39,7 @@ class MemberHandler(private val repository: MemberRepository, private val passwo
         Response.created(
             request.bodyToMono(MemberUpsertForm::class.java)
                 .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.BAD_REQUEST)))
-                .filterWhen { repository.existsByUid(it.userId).not() }
+                .filterWhen { !repository.existsByUid(it.userId) }
                 .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.CONFLICT)))
                 .flatMap { member ->
                     repository.save(
@@ -71,24 +71,22 @@ class MemberHandler(private val repository: MemberRepository, private val passwo
                 .filter { passwordEncoder.matches(it.password, original.password) }
                 .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
                 .flatMap { member ->
-                    Mono.fromCallable {
-                        repository.save(
-                            original.copy(
-                                id = original.id,
-                                userId = request.pathVariable(Constant.ID),
-                                name = member.name,
-                                password = passwordEncoder.encode(member.password)
-                            )
-                        ).map { MemberDto(it.userId, it.name) }
-                    }
+                    repository.save(
+                        original.copy(
+                            id = original.id,
+                            userId = member.userId,
+                            name = member.name,
+                            password = passwordEncoder.encode(member.password)
+                        )
+                    ).map { MemberDto(it.userId, it.name) }
                 }
         ).awaitSingle()
     }
 
     suspend fun deleteMember(request: ServerRequest): ServerResponse =
         Response.ok(
-            repository.findByUid(request.pathVariable(Constant.ID))
+            repository.findById(request.pathVariable(Constant.ID).toLong())
                 .switchIfEmpty(Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)))
-                .map { repository.delete(it) }
+                .mapNotNull { it?.id?.let { id -> repository.deleteById(id) } }
         ).awaitSingle()
 }
