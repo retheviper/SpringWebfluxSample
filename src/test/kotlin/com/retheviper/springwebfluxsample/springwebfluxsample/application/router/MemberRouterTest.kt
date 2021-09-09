@@ -1,5 +1,6 @@
 package com.retheviper.springwebfluxsample.springwebfluxsample.application.router
 
+import com.retheviper.kotlintools.time.toYearMonth
 import com.retheviper.springwebfluxsample.application.handler.MemberHandler
 import com.retheviper.springwebfluxsample.application.model.request.MemberUpsertForm
 import com.retheviper.springwebfluxsample.application.router.MemberRouter
@@ -22,10 +23,13 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.body
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import java.time.LocalDate
 
 class MemberRouterTest : RouterTestSpec() {
 
     private lateinit var repository: MemberRepository
+
+    private val path = "/api/v1/web/members"
 
     init {
 
@@ -47,7 +51,7 @@ class MemberRouterTest : RouterTestSpec() {
             }
 
             webClient.get()
-                .uri("/api/v1/web/members")
+                .uri(path)
                 .exchange()
                 .expectStatus().is2xxSuccessful
                 .expectBodyList<MemberDto>()
@@ -68,7 +72,7 @@ class MemberRouterTest : RouterTestSpec() {
             }
 
             val actual = webClient.get()
-                .uri("/api/v1/web/members/1")
+                .uri("$path/1")
                 .exchange()
                 .expectStatus().is2xxSuccessful
                 .expectBody<MemberDto>()
@@ -96,7 +100,7 @@ class MemberRouterTest : RouterTestSpec() {
             }
 
             val actual = webClient.post()
-                .uri("/api/v1/web/members")
+                .uri(path)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(
                     Mono.just(
@@ -138,7 +142,7 @@ class MemberRouterTest : RouterTestSpec() {
             }
 
             val actual = webClient.put()
-                .uri("/api/v1/web/members/1")
+                .uri("$path/1")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(
                     Mono.just(
@@ -178,7 +182,7 @@ class MemberRouterTest : RouterTestSpec() {
             }
 
             webClient.delete()
-                .uri("/api/v1/web/members/1")
+                .uri("$path/1")
                 .exchange()
                 .expectStatus().is2xxSuccessful
                 .expectBody<Unit>()

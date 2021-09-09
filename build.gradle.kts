@@ -44,6 +44,9 @@ dependencies {
     // DB
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     runtimeOnly("io.r2dbc:r2dbc-h2")
+
+    // Custom jar
+    implementation(files("libs/kotlintools-1.0-SNAPSHOT.jar"))
 }
 
 tasks {
