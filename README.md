@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-A simple sample of Rest API by Spring WebFlux with Kotlin.
+A simple sample of Rest API by [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html) with Kotlin.
 
 This is another implementation version of [Spring Boot Sample](https://github.com/retheviper/springbootsample).
 
